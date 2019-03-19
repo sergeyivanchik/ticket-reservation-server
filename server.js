@@ -6,33 +6,33 @@ const Schema = mongoose.Schema;
 var app = express();
 var jsonParser = bodyParser.json();
  
-const userScheme = new Schema({
-  name: String,
-  age: Number
-});
-
+// подключение
 mongoose.connect("mongodb://localhost:27017/usersdb", { useNewUrlParser: true });
-
-const User = mongoose.model("User", userScheme);
-const user = new User({
-    name: "Bim",
-    age: 50
-});
   
-user.save(function(err){
-    mongoose.disconnect();  // отключение от базы данных
+// установка схемы
+const userScheme = new Schema({
+    name: {
+        type: String,
+        required: true,
+        minlength:3,
+        maxlength:20
+    },
+    age: {
+        type: Number,
+        required: true,
+        min: 1,
+        max:100
+    }
+});
+const User = mongoose.model("User", userScheme);
+User.create({name: "Tom", age: 34}, function(err, doc){
+    mongoose.disconnect();
       
     if(err) return console.log(err);
-    console.log("Сохранен объект", user);
+      
+    console.log("Сохранен объект user", doc);
 });
 
-// получение списка данных
-// app.get("/api/cards", function(req, res){
-      
-//     var content = fs.readFileSync("cardDescription.json", "utf8");
-//     var cards = JSON.parse(content);
-//     res.send(cards);
-// });
 app.listen(8080, function(){
   console.log("Сервер ожидает подключения...");
 });
