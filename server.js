@@ -25,13 +25,13 @@ const userScheme = new Schema({
     }
 });
 const User = mongoose.model("User", userScheme);
-const id = "5c915edd9e353c1c209b7c34";
-User.findById(id, function(err, doc){
-    mongoose.disconnect();
-     
-    if(err) return console.log(err);
-     
-    console.log(doc);
+
+User.deleteOne({age:50}, function(err, result){
+  mongoose.disconnect();
+   
+  if(err) return console.log(err);
+   
+  console.log(result);
 });
 
 
