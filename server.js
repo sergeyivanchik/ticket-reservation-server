@@ -25,13 +25,14 @@ const userScheme = new Schema({
     }
 });
 const User = mongoose.model("User", userScheme);
-User.findOne({name: "Bim"}, function(err, doc){
-  mongoose.disconnect();
-   
-  if(err) return console.log(err);
-   
-  console.log(doc);
-})
+const id = "5c915edd9e353c1c209b7c34";
+User.findById(id, function(err, doc){
+    mongoose.disconnect();
+     
+    if(err) return console.log(err);
+     
+    console.log(doc);
+});
 
 
 app.listen(8080, function(){
