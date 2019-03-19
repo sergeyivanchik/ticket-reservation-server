@@ -26,11 +26,10 @@ const userScheme = new Schema({
 });
 const User = mongoose.model("User", userScheme);
 
-User.deleteOne({age:50}, function(err, result){
+User.updateOne({name: "Tom"}, {name: "Tom Smith"}, function(err, result){
+     
   mongoose.disconnect();
-   
   if(err) return console.log(err);
-   
   console.log(result);
 });
 
