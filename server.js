@@ -32,7 +32,14 @@ const User = mongoose.model("User", userScheme);
       
 //     console.log("Сохранен объект user", doc);
 // });
-User.find({}, function(err, docs){
+// User.find({}, function(err, docs){
+//   mongoose.disconnect();
+   
+//   if(err) return console.log(err);
+   
+//   console.log(docs);
+// });
+User.find({name: "Tom"}, function(err, docs){
   mongoose.disconnect();
    
   if(err) return console.log(err);
