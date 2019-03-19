@@ -25,27 +25,14 @@ const userScheme = new Schema({
     }
 });
 const User = mongoose.model("User", userScheme);
-// User.create({name: "Tom", age: 34}, function(err, doc){
-//     mongoose.disconnect();
-      
-//     if(err) return console.log(err);
-      
-//     console.log("Сохранен объект user", doc);
-// });
-// User.find({}, function(err, docs){
-//   mongoose.disconnect();
-   
-//   if(err) return console.log(err);
-   
-//   console.log(docs);
-// });
-User.find({name: "Tom"}, function(err, docs){
+User.findOne({name: "Bim"}, function(err, doc){
   mongoose.disconnect();
    
   if(err) return console.log(err);
    
-  console.log(docs);
-});
+  console.log(doc);
+})
+
 
 app.listen(8080, function(){
   console.log("Сервер ожидает подключения...");
