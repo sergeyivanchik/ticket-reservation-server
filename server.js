@@ -1,17 +1,14 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var fs = require("fs");
- 
-var app = express();
-var jsonParser = bodyParser.json();
- 
-// получение списка данных
-app.get("/api/users", function(req, res){
-      
-    var content = fs.readFileSync("users.json", "utf8");
-    var users = JSON.parse(content);
-    res.send(users);
+const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
+const jsonParser = express.json();
+
+app.use(jsonParser);
+app.use('/films',require('./routes/film'));
+mongoose.connect("mongodb://localhost:27017/cinema", { useNewUrlParser: true }, function(err){
+    if(err) return console.log(err);
+    app.listen(8080, function(){
+        console.log("Сервер ожидает подключения...");
+    });
 });
-app.listen(8080, function(){
-  console.log("Сервер ожидает подключения...");
-});
+ 
