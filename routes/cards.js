@@ -8,7 +8,7 @@ filmModel.countDocuments( function(err,count) {
     filmModel.find({}, function(err, films){
       if(err) return console.log(err);
       res.json(films)
-    })
+    }).sort({_id:-1}).limit(6);
   }
   else {
     res.json('GG');
