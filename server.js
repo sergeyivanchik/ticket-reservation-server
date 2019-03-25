@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const jsonParser = express.json();
+const cors = require('cors');
+const toJson = require('@meanie/mongoose-to-json'); 
 
+mongoose.plugin(toJson);
+app.use(cors())
 app.use(jsonParser);
 app.use('/',require('./routes/index'));
 mongoose.connect("mongodb://localhost:27017/cinema", { useNewUrlParser: true }, function(err){
