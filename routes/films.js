@@ -9,7 +9,7 @@ router.get("/", function(req, res){
 });
 
 router.get("/:id", function(req, res){
-  filmModel.findOne({_id: req.params.id}, function(err, film){
+  filmModel.findById(req.params.id, function(err, film){
     if(err) return console.log(err);
     res.json(film);
   });
