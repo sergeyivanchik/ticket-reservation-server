@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
-router.use('/films',require('./films'));
+router.use('/movies',require('./movies'));
 router.use('/',require('./cards'));
 router.use('/cinemas', require('./cinemas'));
-router.use('/seanses', require('./seanses'));
+router.use('/sessions', require('./sessions'));
+router.use('/users', require('./users'));
 
 module.exports = router;

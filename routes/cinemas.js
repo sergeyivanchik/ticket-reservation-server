@@ -11,21 +11,30 @@ router.get("/", function(req, res){
     cinemaModel.find({}, function(err, cinemas){
       if(err) return console.log(err);
       res.json(cinemas)
-    });
+    }).select(req.query.select || '');
 });
 
 router.get("/:id", function(req, res){
-    cinemaModel.findOne({_id: req.params.id}, function(err, cinema){
+    cinemaModel.findById(req.params.id, function(err, cinema){
       if(err) return console.log(err);
       res.json(cinema);
-    });
+    }).select(req.query.select || '');
 });
 
-router.get("/:id/:hall_id", function(req, res){
-  cinemaModel.findOne({_id: req.params.id}, function(err, cinema){
+router.get("/:id/:hall", function(req, res){
+  cinemaModel.findOne(req.params.id, function(err, cinema){
     if(err) return console.log(err);
-    res.json(cinema.halls[parseInt(req.params.hall_id)]);
+    res.json(cinema.halls[parseInt(req.params.hall)]);
   });
-    });
+});
+
+//Добавление зала
+router.put("/insert/:id", function(req, res){
+  if(!req.body) return res.sendStatus(400)
+  cinemaModel.findByIdAndUpdate(req.params.id,{$push :{halls:req.body}}, { upsert: true }, function (err, hall) {
+    if(err) return console.log(err);
+    res.json(hall);
+  });
+});
 
 module.exports = router;
