@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose; // деструктуризация проще и выглядит солиднее
 
-
-const cinemaSchema = new Schema({name: String, halls:[
-    {
+// удобочитаемость наше всё :0
+const cinemaSchema = new Schema({
+    name: String, 
+    halls:[{
         type:Object
-    }]}, {versionKey: false});
+    }]
+}, {
+    versionKey: false
+});
    
 module.exports = mongoose.model("Cinema", cinemaSchema);
