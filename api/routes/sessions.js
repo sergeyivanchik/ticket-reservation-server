@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const seanseModel = require("../models/sessions.js");
+const seanseModel = require("../models/session.js");
 
 router.post("/", async function (req, res) {     
     if(!req.body) return res.sendStatus(400);
