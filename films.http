@@ -172,18 +172,3 @@ Content-Type: application/json
             }
         ]
 }
-
-###
-POST  http://localhost:8080/users 
-Content-Type: application/json
-
-{
-    "name" : "Sergey",
-    "login" : "qwerasss",
-    "password" : "98123",
-    "email" : "sdferty@mail.com"   
-}
-
-###
-GET  http://localhost:8080/users 
-Content-Type: application/json
