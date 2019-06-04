@@ -6,6 +6,9 @@ const cors = require('cors');
 const toJson = require('@meanie/mongoose-to-json'); 
 
 mongoose.plugin(toJson);
+require('./api/models/film.js');
+require('./api/models/cinema.js');
+require('./api/models/session.js');
 app.use(cors())
 app.use(jsonParser);
 app.use('/',require('./api/routes/index'));
