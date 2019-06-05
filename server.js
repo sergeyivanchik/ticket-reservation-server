@@ -10,7 +10,7 @@ const port = 8080;
 mongoose.plugin(toJson);
 
 require('./api/utils/dataBase.js').setUpConnection();
-require('./api/models/film.js');
+require('./api/models/movie.js');
 require('./api/models/cinema.js');
 require('./api/models/session.js');
 
