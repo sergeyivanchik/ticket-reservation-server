@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 User = mongoose.model('User');
-var jwt = require('jsonwebtoken');
-var config = require('../../config.js');
+const jwt = require('jsonwebtoken');
+const config = require('../../config.js');
+const service = require('../passport/service.js');
 
 
 async function signup(req, res) {
@@ -14,7 +15,7 @@ async function signup(req, res) {
     } else {
       const newUser = new User({
         username: req.body.username,
-        password: req.body.password,
+        password: service.createHash(req.body.password),
         email: req.body.email
       });
       await newUser.save()
@@ -33,7 +34,7 @@ async function login(req, res) {
   const user = await User.findOne({ username: req.body.username });
   if (!user) {
     res.status(401).send({ message: 'Username not found.' });
-  } else if(user.password !== req.body.password){
+  } else if(!service.isValidPassword(user, req.body.password)){
     res.status(401).send({ message: 'Wrong password.' });
   } else {
     const token = jwt.sign({id: user.id, expiresIn: '1d'}, config.secretKey);
