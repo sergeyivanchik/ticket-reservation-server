@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 User = mongoose.model('User');
-const jwt = require('jsonwebtoken');
-const config = require('../../config.js');
 const service = require('../passport/service.js');
 
 
@@ -37,8 +35,7 @@ async function login(req, res) {
   } else if(!service.isValidPassword(user, req.body.password)){
     res.status(401).send({ message: 'Wrong password.' });
   } else {
-    const token = jwt.sign({id: user.id, expiresIn: '1d'}, config.secretKey);
-    req.body.token = 'bearer '+ token;
+    req.body.token = service.createToken(user.id);
     res.send({ token: req.body.token });
   }
 }
