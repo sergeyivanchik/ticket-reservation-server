@@ -104,7 +104,8 @@ Content-Type: application/json
 
 ### 
 GET http://localhost:8080/sessions 
-Content-Type: application/json 
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjZjk0MDliYzY2YmU1NmMwY2Q3Nzg1NyIsImV4cGlyZXNJbiI6IjFkIiwiaWF0IjoxNTU5ODQ5NDk1fQ.tYDVoXSDK9JHBBzJ33CrYHoqj7IyYehFIqGgSPZx52E
 
 ### 
 GET http://localhost:8080/sessions/5cb727ed3f59f42ff8b91873 
@@ -168,3 +169,22 @@ Content-Type: application/json
 } 
 ] 
 }
+
+### 
+POST http://localhost:8080/signup 
+Content-Type: application/json 
+
+{ 
+"username" : "qweqeqe", 
+"password" : "qweqwe", 
+"email":"123456@mail.ru" 
+} 
+
+### 
+POST http://localhost:8080/login
+Content-Type: application/json 
+
+{ 
+"username" : "qweqeqe", 
+"password" : "qweqwe"
+} 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 Session = mongoose.model('Session');
+const Token = require('../controllers/users.js');
 
 
 async function listSessions(req, res) {
@@ -10,7 +11,7 @@ async function listSessions(req, res) {
         message: error.message
       });
     });
-};
+}
 
 async function addSession(req, res) {
   const newSession = await new Session(req.body);
