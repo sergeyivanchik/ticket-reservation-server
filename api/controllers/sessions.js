@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 Session = mongoose.model('Session');
-const Token = require('../controllers/users.js');
 
 
 async function listSessions(req, res) {
