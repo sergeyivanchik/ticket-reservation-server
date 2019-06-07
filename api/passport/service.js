@@ -3,15 +3,14 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config.js');
 
 
-function createHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-};
+createHash = password => 
+  bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
-function isValidPassword(user, password) {
-  return bcrypt.compareSync(password, user.password);
-}
+isValidPassword = (user, password) => 
+  bcrypt.compareSync(password, user.password);
 
-function createToken(userId) {
+
+createToken = userId => {
   const token = jwt.sign({
     userId,
     expiresIn: '1d'

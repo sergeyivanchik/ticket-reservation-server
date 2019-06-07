@@ -41,11 +41,7 @@ async function login(req, res) {
 }
 
 function getToken(headers) {
-  if (headers && headers.authorization) {
-    return headers.authorization;
-  } else {
-    return null;
-  }
+  headers && headers.authorization ? headers.authorization : null;
 };
 
 module.exports = {

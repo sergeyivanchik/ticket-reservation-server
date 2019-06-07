@@ -6,7 +6,7 @@ const jsonParser = express.json();
 const cors = require('cors');
 const toJson = require('@meanie/mongoose-to-json'); 
 const passport = require('passport');
-const port = 8080;
+const port = require('./config.js').port;
 
 
 mongoose.plugin(toJson);
@@ -21,7 +21,6 @@ require('./api/passport/jwt.js');
 app.use(cors());
 app.use(jsonParser);
 app.use('/',require('./api/routes/index'));
-
 
 app.use(passport.initialize());
 
