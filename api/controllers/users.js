@@ -40,9 +40,8 @@ async function login(req, res) {
   }
 }
 
-function getToken(headers) {
+getToken = headers => 
   headers && headers.authorization ? headers.authorization : null;
-};
 
 module.exports = {
   signup,
