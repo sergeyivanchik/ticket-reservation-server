@@ -30,13 +30,11 @@ async function signup(req, res) {
 
 async function login(req, res) {
   const user = await User.findOne({ username: req.body.username });
-  if (!user) {
-    res.status(401).send({ message: 'Username not found.' });
-  } else if(!service.isValidPassword(user, req.body.password)){
-    res.status(401).send({ message: 'Wrong password.' });
+  if (!user || !service.isValidPassword(user, req.body.password)) {
+    res.status(401).send({ message: 'Wrong username or password.' });
   } else {
     req.body.token = service.createToken(user.id);
-    res.send({ token: req.body.token });
+    res.json({ token: req.body.token });
   }
 }
 
