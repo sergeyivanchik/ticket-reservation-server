@@ -3,14 +3,11 @@ const { Schema } = mongoose;
 
 
 const cinemaSchema = new Schema({
-  name: String, 
-  halls: [{
+  name: String,
+  city: String,
+  additionalServices: [{
     name: String,
-    places: [{
-      row: Number,
-      countOfSeats: Number,
-      cost: Number
-    }]
+    cost: Number
   }]
 }, 
 {

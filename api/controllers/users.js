@@ -34,7 +34,7 @@ async function login(req, res) {
     res.status(401).send({ message: 'Wrong username or password.' });
   } else {
     req.body.token = service.createToken(user.id);
-    res.json({ token: req.body.token });
+    res.json({ token: req.body.token, username: req.body.username });
   }
 }
 

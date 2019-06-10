@@ -4,14 +4,9 @@ const { Schema } = mongoose;
 
 const sessionSchema = new Schema({
   date: Number,
-  cinema: {type:Schema.ObjectId, ref: "Cinema"},
-  hall: String, 
-  movie: {type:Schema.ObjectId, ref: "Film"},
-  selectedSeats: [{
-    row: Number,
-    seat: Number,
-    price: Number
-  }]
+  cinema: {type: Schema.ObjectId, ref: "Cinema"},
+  hall: {type: Schema.ObjectId, ref: "Hall"}, 
+  movie: {type: Schema.ObjectId, ref: "Film"},
 },
 {
   versionKey: false
