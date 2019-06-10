@@ -17,6 +17,9 @@ require('./api/models/movie.js');
 require('./api/models/cinema.js');
 require('./api/models/session.js');
 require('./api/models/user.js');
+require('./api/models/hall.js');
+require('./api/models/boughtSeat.js')
+
 require('./api/passport/jwt.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
