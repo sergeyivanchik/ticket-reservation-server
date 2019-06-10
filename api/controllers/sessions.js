@@ -10,7 +10,7 @@ async function listSessions(req, res) {
         message: error.message
       });
     });
-};
+}
 
 async function addSession(req, res) {
   const newSession = await new Session(req.body);

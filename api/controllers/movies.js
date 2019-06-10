@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-Movie = mongoose.model('Film');
+Movie = mongoose.model('Movie');
 
 
 async function listMovies(req, res) {
