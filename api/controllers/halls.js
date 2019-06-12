@@ -14,6 +14,17 @@ async function addHall(req, res) {
     });
 };
 
+async function hallByCinema(req, res) {
+  await Hall.find({_id: req.params.id ,cinema: req.params.cinemaId})
+    .then(hall => res.send(hall))
+    .catch(error => {
+      res.status(500).send({
+        message: error.message
+      });
+    });
+};
+
 module.exports = {
-  addHall
+  addHall,
+  hallByCinema
 }
