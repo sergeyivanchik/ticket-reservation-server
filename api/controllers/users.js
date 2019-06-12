@@ -34,9 +34,19 @@ async function login(req, res) {
     res.status(401).send({ message: 'Wrong username or password.' });
   } else {
     req.body.token = service.createToken(user.id);
-    res.json({ token: req.body.token, username: req.body.username });
+    res.json({ token: req.body.token, username: req.body.username, id: user.id });
   }
 }
+
+async function currentUser(req, res) {
+  await User.findById(req.user.id)
+    .then(user => res.send({id: user.id}))
+    .catch(error => {
+      res.status(500).send({
+        message: error.message
+      });
+    });
+};
 
 getToken = headers => 
   headers && headers.authorization ? headers.authorization : null;
@@ -44,5 +54,6 @@ getToken = headers =>
 module.exports = {
   signup,
   login,
-  getToken
+  getToken,
+  currentUser
 }
