@@ -14,6 +14,22 @@ async function addBoughtSeat(req, res) {
     });
 };
 
+async function listSessionBoughtSeats(req, res) {
+    await BoughtSeat.find({
+      session: req.params.sessionId, 
+      cinema: req.params.cinemaId,
+      hall: req.params.hallId,
+      movie: req.params.movieId
+    })
+      .then(sessions => res.send(sessions))
+      .catch(error => {
+        res.status(500).send({
+          message: error.message
+        });
+      });
+  };
+
 module.exports = {
-  addBoughtSeat
+  addBoughtSeat,
+  listSessionBoughtSeats
 }
