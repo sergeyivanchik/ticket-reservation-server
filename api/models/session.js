@@ -6,7 +6,7 @@ const sessionSchema = new Schema({
   date: Number,
   cinema: {type: Schema.ObjectId, ref: "Cinema"},
   hall: {type: Schema.ObjectId, ref: "Hall"}, 
-  movie: {type: Schema.ObjectId, ref: "Film"},
+  movie: {type: Schema.ObjectId, ref: "Movie"},
 },
 {
   versionKey: false
