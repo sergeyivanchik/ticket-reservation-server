@@ -6,8 +6,7 @@ const server = require('http').createServer(app);
 const jsonParser = express.json();
 const cors = require('cors');
 const toJson = require('@meanie/mongoose-to-json'); 
-const passport = require('passport');
-const port = require('./config.js').port;
+const port = require('./api/configs/server').port;
 
 
 mongoose.plugin(toJson);
@@ -23,6 +22,7 @@ require('./api/models/selectedSeat.js')
 
 require('./api/passport/jwt.js');
 
+app.use(require("body-parser").text());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

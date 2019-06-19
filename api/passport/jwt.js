@@ -4,7 +4,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
 const User = require('../models/user.js');
-const config = require('../../config.js');
+const config = require('../configs/jwt');
 
 
 passport.use('jwt', new JwtStrategy({

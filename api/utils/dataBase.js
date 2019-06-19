@@ -1,4 +1,4 @@
-const connectionString = require('../../config').dbConnectionString;
+const connectionString = require('../configs/dataBase').dbConnectionString;
 const mongoose = require('mongoose');
 
 function setUpConnection() {
