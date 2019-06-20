@@ -4,7 +4,7 @@ const passport = require('passport');
 
 
 router.route("/")
-  .post(boughtSeatController.addBoughtSeat)
+  .put(passport.authenticate('jwt', { session: false }), boughtSeatController.addBoughtSeat)
 
 router.route("/:sessionId/:cinemaId/:hallId/:movieId")
   .get(passport.authenticate('jwt', { session: false }), boughtSeatController.listSessionBoughtSeats)
