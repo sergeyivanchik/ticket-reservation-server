@@ -8,6 +8,10 @@ const selectedSeatsSchema = new Schema({
   cinema: {type: Schema.ObjectId, ref: "Cinema"},
   hall: {type: Schema.ObjectId, ref: "Hall"},
   movie: {type: Schema.ObjectId, ref: "Movie"},
+  additionalServices: {
+    type: Array,
+    default: []
+  },
   row: Number,
   seat: Number,
   cost: Number
