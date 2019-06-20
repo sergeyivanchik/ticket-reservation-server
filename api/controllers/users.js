@@ -40,7 +40,7 @@ async function login(req, res) {
 
 async function currentUser(req, res) {
   await User.findById(req.user.id)
-    .then(user => res.send({id: user.id}))
+    .then(user => res.send({id: user.id, username: user.username}))
     .catch(error => {
       res.status(500).send({
         message: error.message

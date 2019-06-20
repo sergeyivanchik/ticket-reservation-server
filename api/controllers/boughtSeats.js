@@ -1,17 +1,31 @@
 const mongoose = require('mongoose');
 BoughtSeat = mongoose.model('BoughtSeat');
+const deleteBoughtSeats = require('./selectedSeats').deleteBoughtsSeats
 
 
 async function addBoughtSeat(req, res) {
   const newBoughtSeat = await new BoughtSeat(req.body);
   newBoughtSeat.save()
-    .then(boughtSeat => res.send(boughtSeat))
+    .then(boughtSeat => {
+      deleteBoughtSeats(
+        req.body.user,
+        req.body.session,
+        req.body.cinema,
+        req.body.hall,
+        req.body.movie,
+        req.body.row,
+        req.body.seat,
+        req.body.cost
+      );
+      res.send(boughtSeat)
+    })
     .catch(error => {
       res.status(500).send({
         message: error.message
       });
       res.send(error);
     });
+  
 };
 
 async function listSessionBoughtSeats(req, res) {
