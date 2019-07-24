@@ -4,18 +4,29 @@ const deleteBoughtSeats = require('./selectedSeats').deleteBoughtsSeats
 
 
 async function addBoughtSeat(req, res) {
-  const newBoughtSeat = await new BoughtSeat(req.body);
+  await req.body.seats.map(seatInfo => {
+    const newBoughtSeat = new BoughtSeat({
+      additionalServices: seatInfo.additionalServices,
+      user: seatInfo.user,
+      session: seatInfo.session.id,
+      cinema: seatInfo.cinema.id,
+      hall: seatInfo.hall.id,
+      movie: seatInfo.movie.id,
+      row: seatInfo.row,
+      seat: seatInfo.seat,
+      cost: seatInfo.cost
+    });
   newBoughtSeat.save()
     .then(boughtSeat => {
       deleteBoughtSeats(
-        req.body.user,
-        req.body.session,
-        req.body.cinema,
-        req.body.hall,
-        req.body.movie,
-        req.body.row,
-        req.body.seat,
-        req.body.cost
+        seatInfo.user,
+        seatInfo.session.id,
+        seatInfo.cinema.id,
+        seatInfo.hall.id,
+        seatInfo.movie.id,
+        seatInfo.row,
+        seatInfo.seat,
+        seatInfo.cost
       );
       res.send(boughtSeat)
     })
@@ -25,7 +36,7 @@ async function addBoughtSeat(req, res) {
       });
       res.send(error);
     });
-  
+  })
 };
 
 async function listSessionBoughtSeats(req, res) {

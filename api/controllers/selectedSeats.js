@@ -3,11 +3,11 @@ SelectedSeats = mongoose.model('SelectedSeat');
 
 
 let timer = '';
-const timerTime = 900000;
+const timerTime = 120000;
 
 async function addSelectedSeat(req, res) {
   const seat = await SelectedSeats.findOne({
-    user: req.body.user.user,
+    // user: req.body.user.user,
     session: req.body.user.session,
     cinema: req.body.user.cinema,
     hall: req.body.user.hall,
@@ -20,14 +20,11 @@ async function addSelectedSeat(req, res) {
     const newSelectedSeat = await new SelectedSeats(req.body.user);
     newSelectedSeat.save()
       .then(selectedSeat => {
-        timer = setTimeout(() => {SelectedSeats.deleteMany({user: selectedSeat.user})
+        timer = setTimeout(() => {SelectedSeats.deleteMany({user: req.body.user.user})
         .then(result => { 
               res.send(result);
             })
-            .catch(error => {
-              res.status(500).send({
-                message: error.message
-              });
+        .catch(error => {
               res.send(error);
             });
         }, timerTime);
@@ -37,7 +34,6 @@ async function addSelectedSeat(req, res) {
         res.status(500).send({
           message: error.message
         });
-        res.send(error);
       });
   } else {
     await SelectedSeats.findOneAndDelete({
@@ -170,29 +166,29 @@ async function deleteAllAdditionalServices(req, res) {
     res.status(500).send({
       message: error.message
     });
-    res.send(error);
+    // res.send(error);
   }); 
 }
 
-async function deleteAllAdditionalServices(req, res) {
-  await SelectedSeats.updateMany({
-    user: req.params.userId,
-    session: req.params.sessionId, 
-    cinema: req.params.cinemaId,
-    hall: req.params.hallId,
-    movie: req.params.movieId, 
-  }, 
-  {
-    $pull: {additionalServices: {$exists: true}}
-  })
-  .then(deletedServices => res.send(deletedServices))
-  .catch(error => {
-    res.status(500).send({
-      message: error.message
-    });
-    res.send(error);
-  }); 
-}
+// async function deleteAllAdditionalServices(req, res) {
+//   await SelectedSeats.updateMany({
+//     user: req.params.userId,
+//     session: req.params.sessionId, 
+//     cinema: req.params.cinemaId,
+//     hall: req.params.hallId,
+//     movie: req.params.movieId, 
+//   }, 
+//   {
+//     $pull: {additionalServices: {$exists: true}}
+//   })
+//   .then(deletedServices => res.send(deletedServices))
+//   .catch(error => {
+//     res.status(500).send({
+//       message: error.message
+//     });
+//     // res.send(error);
+//   }); 
+// }
 
 async function deleteBoughtsSeats(user, session, cinema, hall, movie, row, seat, cost) {
   await SelectedSeats.findOneAndDelete({
