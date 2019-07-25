@@ -16,6 +16,7 @@ async function addBoughtSeat(req, res) {
       seat: seatInfo.seat,
       cost: seatInfo.cost
     });
+    
   newBoughtSeat.save()
     .then(boughtSeat => {
       deleteBoughtSeats(

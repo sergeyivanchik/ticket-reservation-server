@@ -3,7 +3,6 @@ const stripeKey = require('../configs/payment').stripeKey
 const stripe = require("stripe")(stripeKey);
 
 
-
 router.post("/", async (req, res) => {
   try {
     let {status} = await stripe.charges.create({

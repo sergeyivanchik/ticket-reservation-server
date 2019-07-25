@@ -7,7 +7,6 @@ const timerTime = 120000;
 
 async function addSelectedSeat(req, res) {
   const seat = await SelectedSeats.findOne({
-    // user: req.body.user.user,
     session: req.body.user.session,
     cinema: req.body.user.cinema,
     hall: req.body.user.hall,
@@ -166,29 +165,9 @@ async function deleteAllAdditionalServices(req, res) {
     res.status(500).send({
       message: error.message
     });
-    // res.send(error);
+    res.send(error);
   }); 
 }
-
-// async function deleteAllAdditionalServices(req, res) {
-//   await SelectedSeats.updateMany({
-//     user: req.params.userId,
-//     session: req.params.sessionId, 
-//     cinema: req.params.cinemaId,
-//     hall: req.params.hallId,
-//     movie: req.params.movieId, 
-//   }, 
-//   {
-//     $pull: {additionalServices: {$exists: true}}
-//   })
-//   .then(deletedServices => res.send(deletedServices))
-//   .catch(error => {
-//     res.status(500).send({
-//       message: error.message
-//     });
-//     // res.send(error);
-//   }); 
-// }
 
 async function deleteBoughtsSeats(user, session, cinema, hall, movie, row, seat, cost) {
   await SelectedSeats.findOneAndDelete({
