@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const movieSchema = new Schema({
   name: String, 
   description: String, 
-  poster: String
+  poster: String,
+  duration: Number
 },
 { 
   versionKey: false 

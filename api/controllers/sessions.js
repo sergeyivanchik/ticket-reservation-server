@@ -4,6 +4,22 @@ Session = mongoose.model('Session');
 
 async function listSessions(req, res) {
   await Session.find()
+    .populate('cinema')
+    .populate('hall')
+    .populate('movie')
+    .then(sessions => res.send(sessions))
+    .catch(error => {
+      res.status(500).send({
+        message: error.message
+      });
+    });
+}
+
+async function listSessionsByMovie(req, res) {
+  await Session.find({movie: req.params.movieId})
+    .populate('cinema')
+    .populate('hall')
+    .populate('movie')
     .then(sessions => res.send(sessions))
     .catch(error => {
       res.status(500).send({
@@ -42,5 +58,6 @@ async function addSelectedSeats(req, res) {
 module.exports = {
   listSessions,
   addSession,
-  addSelectedSeats
+  addSelectedSeats,
+  listSessionsByMovie
 }

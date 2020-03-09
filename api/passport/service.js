@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../../config.js');
+const config = require('../configs/jwt');
 
 
 createHash = password => 
